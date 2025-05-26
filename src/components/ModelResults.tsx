@@ -3,7 +3,7 @@ import React from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Progress } from '@/components/ui/progress';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, ResponsiveContainer, Cell } from 'recharts';
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, ResponsiveContainer, Cell, Tooltip as RechartsTooltip } from 'recharts';
 import { Info } from 'lucide-react';
 import type { ModelMetrics } from '@/pages/Index';
 
@@ -188,8 +188,8 @@ const ModelResults: React.FC<ModelResultsProps> = ({ metrics, classes }) => {
                   <CartesianGrid strokeDasharray="3 3" />
                   <XAxis type="number" domain={[0, 1]} />
                   <YAxis type="category" dataKey="name" width={80} />
-                  <Tooltip 
-                    formatter={(value, name, props) => [
+                  <RechartsTooltip 
+                    formatter={(value: any, name: any, props: any) => [
                       `${(value as number * 100).toFixed(1)}%`,
                       props.payload?.fullName || name
                     ]}

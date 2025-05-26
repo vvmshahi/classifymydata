@@ -110,7 +110,7 @@ const PredictionPlayground: React.FC<PredictionPlaygroundProps> = ({
                   </SelectTrigger>
                   <SelectContent>
                     {getUniqueValues(feature.feature).map(value => (
-                      <SelectItem key={value} value={String(value)}>
+                      <SelectItem key={String(value)} value={String(value)}>
                         {String(value)}
                       </SelectItem>
                     ))}
@@ -167,7 +167,7 @@ const PredictionPlayground: React.FC<PredictionPlaygroundProps> = ({
                   <div className="text-xs text-gray-500 mt-1">
                     {Object.entries(pred.inputs).map(([key, value]) => (
                       <span key={key} className="mr-3">
-                        {key}: {value}
+                        {key}: {String(value)}
                       </span>
                     ))}
                   </div>
