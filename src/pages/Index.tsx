@@ -1,12 +1,12 @@
-
 import React, { useState } from 'react';
-import { Upload, BarChart3, Target, Download, Lightbulb } from 'lucide-react';
+import { Upload, BarChart3, Target, Download, Lightbulb, RotateCcw } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import FileUpload from '@/components/FileUpload';
 import ModelResults from '@/components/ModelResults';
 import PredictionPlayground from '@/components/PredictionPlayground';
 import InsightCard from '@/components/InsightCard';
+import { generatePDFReport } from '@/utils/pdfGenerator';
 
 export interface DatasetInfo {
   filename: string;
@@ -107,20 +107,18 @@ const Index = () => {
   const downloadReport = () => {
     if (!dataset || !modelMetrics) return;
     
-    const report = {
-      dataset: dataset.filename,
-      metrics: modelMetrics,
-      predictions: predictions,
-      generatedAt: new Date().toISOString()
-    };
-    
-    const blob = new Blob([JSON.stringify(report, null, 2)], { type: 'application/json' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = `${dataset.filename}_ml_report.json`;
-    a.click();
-    URL.revokeObjectURL(url);
+    generatePDFReport({
+      dataset,
+      modelMetrics,
+      predictions
+    });
+  };
+
+  const resetApp = () => {
+    setDataset(null);
+    setModelMetrics(null);
+    setPredictions([]);
+    setIsProcessing(false);
   };
 
   return (
@@ -138,12 +136,20 @@ const Index = () => {
                 <p className="text-sm text-gray-600">No-Code ML Simulation</p>
               </div>
             </div>
-            {dataset && modelMetrics && (
-              <Button onClick={downloadReport} className="bg-teal-500 hover:bg-teal-600">
-                <Download className="h-4 w-4 mr-2" />
-                Download Report
-              </Button>
-            )}
+            <div className="flex space-x-3">
+              {dataset && (
+                <Button onClick={resetApp} variant="outline" className="border-teal-500 text-teal-600 hover:bg-teal-50">
+                  <RotateCcw className="h-4 w-4 mr-2" />
+                  Analyze New File
+                </Button>
+              )}
+              {dataset && modelMetrics && (
+                <Button onClick={downloadReport} className="bg-teal-500 hover:bg-teal-600">
+                  <Download className="h-4 w-4 mr-2" />
+                  Download PDF Report
+                </Button>
+              )}
+            </div>
           </div>
         </div>
       </div>
