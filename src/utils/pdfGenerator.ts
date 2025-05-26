@@ -13,32 +13,32 @@ export const generatePDFReport = (data: ReportData) => {
   const doc = new jsPDF();
   
   // Set colors
-  const tealColor = [13, 148, 136]; // teal-600
-  const grayColor = [75, 85, 99]; // gray-600
-  const lightGrayColor = [156, 163, 175]; // gray-400
+  const tealColor = [13, 148, 136] as const; // teal-600
+  const grayColor = [75, 85, 99] as const; // gray-600
+  const lightGrayColor = [156, 163, 175] as const; // gray-400
   
   let yPosition = 20;
   
   // Title
   doc.setFontSize(24);
-  doc.setTextColor(...tealColor);
+  doc.setTextColor(tealColor[0], tealColor[1], tealColor[2]);
   doc.text('ClassifyMyData - ML Analysis Report', 20, yPosition);
   
   yPosition += 15;
   doc.setFontSize(12);
-  doc.setTextColor(...grayColor);
+  doc.setTextColor(grayColor[0], grayColor[1], grayColor[2]);
   doc.text(`Generated on: ${new Date().toLocaleDateString()}`, 20, yPosition);
   
   yPosition += 20;
   
   // Dataset Overview Section
   doc.setFontSize(16);
-  doc.setTextColor(...tealColor);
+  doc.setTextColor(tealColor[0], tealColor[1], tealColor[2]);
   doc.text('Dataset Overview', 20, yPosition);
   
   yPosition += 10;
   doc.setFontSize(11);
-  doc.setTextColor(...grayColor);
+  doc.setTextColor(grayColor[0], grayColor[1], grayColor[2]);
   
   const overviewData = [
     [`Filename: ${dataset.filename}`, `Samples: ${dataset.rowCount}`],
@@ -56,12 +56,12 @@ export const generatePDFReport = (data: ReportData) => {
   
   // Model Performance Section
   doc.setFontSize(16);
-  doc.setTextColor(...tealColor);
+  doc.setTextColor(tealColor[0], tealColor[1], tealColor[2]);
   doc.text('Model Performance Metrics', 20, yPosition);
   
   yPosition += 10;
   doc.setFontSize(11);
-  doc.setTextColor(...grayColor);
+  doc.setTextColor(grayColor[0], grayColor[1], grayColor[2]);
   
   const metricsData = [
     [`Accuracy: ${modelMetrics.accuracy}%`, `Precision: ${modelMetrics.precision}%`],
@@ -78,12 +78,12 @@ export const generatePDFReport = (data: ReportData) => {
   
   // Confusion Matrix Section
   doc.setFontSize(16);
-  doc.setTextColor(...tealColor);
+  doc.setTextColor(tealColor[0], tealColor[1], tealColor[2]);
   doc.text('Confusion Matrix', 20, yPosition);
   
   yPosition += 10;
   doc.setFontSize(10);
-  doc.setTextColor(...grayColor);
+  doc.setTextColor(grayColor[0], grayColor[1], grayColor[2]);
   
   // Draw confusion matrix
   const cellSize = 25;
@@ -135,12 +135,12 @@ export const generatePDFReport = (data: ReportData) => {
   }
   
   doc.setFontSize(16);
-  doc.setTextColor(...tealColor);
+  doc.setTextColor(tealColor[0], tealColor[1], tealColor[2]);
   doc.text('Top Feature Importances', 20, yPosition);
   
   yPosition += 10;
   doc.setFontSize(11);
-  doc.setTextColor(...grayColor);
+  doc.setTextColor(grayColor[0], grayColor[1], grayColor[2]);
   
   modelMetrics.featureImportances.slice(0, 5).forEach((feature, index) => {
     const barWidth = (feature.importance * 100);
@@ -149,7 +149,7 @@ export const generatePDFReport = (data: ReportData) => {
     doc.text(`${index + 1}. ${feature.feature}`, 20, yPosition);
     
     // Importance bar
-    doc.setFillColor(...tealColor);
+    doc.setFillColor(tealColor[0], tealColor[1], tealColor[2]);
     doc.rect(120, yPosition - 4, barWidth, 6, 'F');
     
     // Percentage
@@ -167,12 +167,12 @@ export const generatePDFReport = (data: ReportData) => {
   }
   
   doc.setFontSize(16);
-  doc.setTextColor(...tealColor);
+  doc.setTextColor(tealColor[0], tealColor[1], tealColor[2]);
   doc.text('Model Insights', 20, yPosition);
   
   yPosition += 10;
   doc.setFontSize(11);
-  doc.setTextColor(...grayColor);
+  doc.setTextColor(grayColor[0], grayColor[1], grayColor[2]);
   
   const insights = [
     `Performance: ${modelMetrics.accuracy >= 90 ? 'Excellent' : modelMetrics.accuracy >= 75 ? 'Good' : 'Needs Improvement'} (${modelMetrics.accuracy}% accuracy)`,
@@ -194,12 +194,12 @@ export const generatePDFReport = (data: ReportData) => {
   
   // Summary Section
   doc.setFontSize(16);
-  doc.setTextColor(...tealColor);
+  doc.setTextColor(tealColor[0], tealColor[1], tealColor[2]);
   doc.text('Executive Summary', 20, yPosition);
   
   yPosition += 10;
   doc.setFontSize(11);
-  doc.setTextColor(...grayColor);
+  doc.setTextColor(grayColor[0], grayColor[1], grayColor[2]);
   
   const summary = `This machine learning analysis processed ${dataset.rowCount} samples with ${dataset.features.length} features to classify ${dataset.classes.length} different classes. The model achieved ${modelMetrics.accuracy}% accuracy with ${modelMetrics.precision}% precision. The ${modelMetrics.featureImportances[0].feature} feature was identified as the most predictive factor. This simulation demonstrates the potential performance of a real classification model on your dataset.`;
   
@@ -211,7 +211,7 @@ export const generatePDFReport = (data: ReportData) => {
   
   // Footer
   doc.setFontSize(8);
-  doc.setTextColor(...lightGrayColor);
+  doc.setTextColor(lightGrayColor[0], lightGrayColor[1], lightGrayColor[2]);
   doc.text('Generated by ClassifyMyData - No-Code ML Simulation', 20, 285);
   doc.text(`Page 1 of ${doc.getNumberOfPages()}`, 170, 285);
   
