@@ -111,8 +111,12 @@ export const generatePDFReport = (data: ReportData) => {
       const x = startX + j * cellSize;
       const y = startY + i * cellSize;
       
-      // Draw cell
-      doc.setFillColor(i === j ? ...tealColor : 239, 68, 68);
+      // Draw cell - fix the spread operator issue
+      if (i === j) {
+        doc.setFillColor(tealColor[0], tealColor[1], tealColor[2]);
+      } else {
+        doc.setFillColor(239, 68, 68);
+      }
       doc.rect(x, y, cellSize, cellSize, 'F');
       
       // Add value
