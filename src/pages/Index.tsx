@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { Upload, BarChart3, Target, Download, Lightbulb, RotateCcw, Sparkles, TrendingUp, Zap, Github, Linkedin, Menu, X } from 'lucide-react';
+import { Upload, BarChart3, Target, Download, Lightbulb, RotateCcw, Sparkles, TrendingUp, Zap, Github, Linkedin, Menu, X, Info } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import FileUpload from '@/components/FileUpload';
 import ModelResults from '@/components/ModelResults';
 import PredictionPlayground from '@/components/PredictionPlayground';
@@ -123,8 +124,8 @@ const Index = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-orange-50/30 to-red-50/20" style={{ fontFamily: 'Inter, system-ui, sans-serif' }}>
-      {/* Futuristic Header */}
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-orange-50/30 to-red-50/20" style={{ fontFamily: 'Space Grotesk, Inter, system-ui, sans-serif' }}>
+      {/* Enhanced Header */}
       <header className="sticky top-0 z-50 bg-white/95 backdrop-blur-xl border-b border-orange-100/50 shadow-lg">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
@@ -153,11 +154,28 @@ const Index = () => {
               <a href="#" className="text-gray-700 hover:text-orange-600 font-medium transition-colors duration-200">
                 Home
               </a>
-              <a href="#" className="text-gray-700 hover:text-orange-600 font-medium transition-colors duration-200">
-                About
-              </a>
+              <Dialog>
+                <DialogTrigger asChild>
+                  <button className="text-gray-700 hover:text-orange-600 font-medium transition-colors duration-200 flex items-center space-x-1">
+                    <Info className="h-4 w-4" />
+                    <span>About</span>
+                  </button>
+                </DialogTrigger>
+                <DialogContent className="max-w-2xl">
+                  <DialogHeader>
+                    <DialogTitle className="text-2xl font-bold bg-gradient-to-r from-orange-600 to-red-600 bg-clip-text text-transparent">
+                      About ClassifyMyData
+                    </DialogTitle>
+                  </DialogHeader>
+                  <div className="mt-4">
+                    <p className="text-gray-700 leading-relaxed text-lg">
+                      ClassifyMyData is an intelligent tool designed to simplify data classification using advanced machine learning algorithms. Whether you're a data analyst, researcher, or business professional, this platform allows you to upload your datasets and instantly receive structured, insightful classifications — no coding required. Built for speed and accuracy, ClassifyMyData turns raw information into actionable intelligence in just a few clicks.
+                    </p>
+                  </div>
+                </DialogContent>
+              </Dialog>
               <a 
-                href="https://github.com" 
+                href="https://github.com/vvmshahi" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="text-gray-700 hover:text-orange-600 font-medium transition-colors duration-200 flex items-center space-x-1"
@@ -166,7 +184,7 @@ const Index = () => {
                 <span>GitHub</span>
               </a>
               <a 
-                href="https://linkedin.com" 
+                href="https://www.linkedin.com/in/vvmshahin" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="text-gray-700 hover:text-orange-600 font-medium transition-colors duration-200 flex items-center space-x-1"
@@ -213,12 +231,31 @@ const Index = () => {
             <div className="md:hidden py-4 border-t border-gray-100">
               <div className="flex flex-col space-y-3">
                 <a href="#" className="text-gray-700 hover:text-orange-600 font-medium py-2">Home</a>
-                <a href="#" className="text-gray-700 hover:text-orange-600 font-medium py-2">About</a>
-                <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="text-gray-700 hover:text-orange-600 font-medium py-2 flex items-center space-x-2">
+                <Dialog>
+                  <DialogTrigger asChild>
+                    <button className="text-gray-700 hover:text-orange-600 font-medium py-2 flex items-center space-x-2 text-left">
+                      <Info className="h-4 w-4" />
+                      <span>About</span>
+                    </button>
+                  </DialogTrigger>
+                  <DialogContent className="max-w-2xl">
+                    <DialogHeader>
+                      <DialogTitle className="text-2xl font-bold bg-gradient-to-r from-orange-600 to-red-600 bg-clip-text text-transparent">
+                        About ClassifyMyData
+                      </DialogTitle>
+                    </DialogHeader>
+                    <div className="mt-4">
+                      <p className="text-gray-700 leading-relaxed text-lg">
+                        ClassifyMyData is an intelligent tool designed to simplify data classification using advanced machine learning algorithms. Whether you're a data analyst, researcher, or business professional, this platform allows you to upload your datasets and instantly receive structured, insightful classifications — no coding required. Built for speed and accuracy, ClassifyMyData turns raw information into actionable intelligence in just a few clicks.
+                      </p>
+                    </div>
+                  </DialogContent>
+                </Dialog>
+                <a href="https://github.com/vvmshahi" target="_blank" rel="noopener noreferrer" className="text-gray-700 hover:text-orange-600 font-medium py-2 flex items-center space-x-2">
                   <Github className="h-4 w-4" />
                   <span>GitHub</span>
                 </a>
-                <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="text-gray-700 hover:text-orange-600 font-medium py-2 flex items-center space-x-2">
+                <a href="https://www.linkedin.com/in/vvmshahin" target="_blank" rel="noopener noreferrer" className="text-gray-700 hover:text-orange-600 font-medium py-2 flex items-center space-x-2">
                   <Linkedin className="h-4 w-4" />
                   <span>LinkedIn</span>
                 </a>
@@ -235,9 +272,9 @@ const Index = () => {
           <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
             <div className="text-center mb-16 animate-fade-in">
               <h1 className="text-5xl md:text-7xl font-bold text-gray-900 mb-8 leading-tight">
-                Transform Your Data Into
+                Make Smarter Decisions With
                 <span className="block bg-gradient-to-r from-orange-500 via-red-500 to-orange-600 bg-clip-text text-transparent">
-                  Intelligent Insights
+                  AI-Powered Data Classification
                 </span>
               </h1>
               <p className="text-xl md:text-2xl text-gray-600 max-w-4xl mx-auto leading-relaxed mb-12">
@@ -397,12 +434,20 @@ const Index = () => {
             </div>
             
             <p className="text-gray-400 text-lg mb-8 max-w-2xl mx-auto leading-relaxed">
-              Part of the AI Intelligence Suite • Built with AI ❤️ by Shahin
+              Part of the AI Intelligence Suite • Built with AI ❤️ by{' '}
+              <a 
+                href="https://www.shahin.studio/" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="text-orange-400 hover:text-orange-300 transition-colors duration-200 font-semibold"
+              >
+                Shahin
+              </a>
             </p>
             
             <div className="flex items-center justify-center space-x-8 mb-8">
               <a 
-                href="https://github.com" 
+                href="https://github.com/vvmshahi" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="flex items-center space-x-2 text-gray-400 hover:text-orange-400 transition-colors duration-200 font-medium"
@@ -411,7 +456,7 @@ const Index = () => {
                 <span>GitHub</span>
               </a>
               <a 
-                href="https://linkedin.com" 
+                href="https://www.linkedin.com/in/vvmshahin" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="flex items-center space-x-2 text-gray-400 hover:text-orange-400 transition-colors duration-200 font-medium"
